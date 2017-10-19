@@ -1,0 +1,9 @@
+﻿body {
+    box-sizing: border-box;
+}
+
+header, footer {
+    background: rgba(33, 37, 41, 1);
+    color: #ffffff;
+}
+

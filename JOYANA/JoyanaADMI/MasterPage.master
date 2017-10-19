@@ -1,0 +1,88 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MelodyADMI_MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="Style/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="Style/css/Style.css" />
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>JOYANA Movies</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs">
+
+                    <li role="presentation">
+                        <asp:HyperLink runat="server"
+                            ForeColor="#212529"
+                            NavigateUrl="~/JoyanaADMI/Productos/ListProductos.aspx"
+                            Text="Peliculas">
+                        </asp:HyperLink>
+                    </li>
+
+                    <li role="presentation">
+                        <asp:HyperLink runat="server"
+                            ForeColor="#212529"
+                            NavigateUrl="~/JoyanaADMI/UsersAdmin/ListAdmins.aspx"
+                            Text="Colaboladores">
+                        </asp:HyperLink>
+                    </li>
+                    <li role="presentation" class="pull-right">
+                        <asp:HyperLink runat="server"
+                            ForeColor="#212529"
+                            NavigateUrl="~/JoyanaADMI/UsersAdmin/LoginAdmin.aspx"
+                            Text="Cerrar Sesión">
+                        </asp:HyperLink>
+                    </li>
+
+                    <li role="presentation" class="pull-right">
+                        <asp:HyperLink runat="server"
+                            ID="txtPerfilName"
+                            ForeColor="#212529"
+                            NavigateUrl="~/JoyanaADMI/UsersAdmin/AdmiPerfil.aspx" 
+                            Text="Perfil">
+                        </asp:HyperLink>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="background: #f2f2f2">
+        <div class="container">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <h2>JOYANA
+                <p class="copyright pull-right">
+                    &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>
+
+                </p>
+            </h2>
+        </div>
+    </footer>
+    <script src="Style/js/jquery-2.1.4.js"></script>
+</body>
+</html>
