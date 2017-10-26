@@ -54,12 +54,6 @@ public partial class JoyanaADMI_UsersAdmin_EditAdmi : System.Web.UI.Page
             }
         }
 
-
-
-        
-        
-
-
         if (!IsPostBack)
         {
             Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
@@ -139,11 +133,14 @@ public partial class JoyanaADMI_UsersAdmin_EditAdmi : System.Web.UI.Page
                 if (AdmiPermiso_BRL.tienePermiso(objSelected.UserId, perm.PermisoId))
                 {
                     //Eliminar
-                    
+
                     AdmiPermiso_BRL.deleteAdmiPermiso(objSelected.UserId, perm.PermisoId);
                 }
             }
 
         }
+        lbValidator.Text = "";
+        Response.Redirect("~/JoyanaADMI/UsersAdmin/ListAdmins.aspx");
+
     }
 }

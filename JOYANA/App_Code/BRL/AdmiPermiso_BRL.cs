@@ -1,4 +1,4 @@
-﻿using AdmiPermisos_DSTableAdapters;
+﻿using AdminPermiso_DSTableAdapters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +26,9 @@ public class AdmiPermiso_BRL
 
     public static Boolean tienePermiso(int userAdmId, int permisoId)
     {
+        //AdminPermisoTableAdapter adapter = new AdminPermisoTableAdapter();
         AdminPermisoTableAdapter adapter = new AdminPermisoTableAdapter();
-        AdmiPermisos_DS.AdminPermisoDataTable table = adapter.GetAdminPermiso(userAdmId, permisoId);
+        AdminPermiso_DS.AdminPermisoDataTable table = adapter.GetAdminPermiso(userAdmId, permisoId);
         if (table.Rows.Count == 0)
         {
             return false;

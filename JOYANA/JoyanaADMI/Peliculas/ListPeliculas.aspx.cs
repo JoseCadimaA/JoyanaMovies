@@ -5,11 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class JoyanaADMI_UsersAdmin_ListAdmins : System.Web.UI.Page
+public partial class JoyanaADMI_Productos : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
         UserADM obj = (UserADM)Session["User"];
         if (obj == null)
         {
@@ -17,70 +16,71 @@ public partial class JoyanaADMI_UsersAdmin_ListAdmins : System.Web.UI.Page
             return;
         }
         //Validacion si puede registrar admins
-        Permiso permAddAdmin = Permiso_BRL.getPermisoByDescription("Registrar Administrador");
+        Permiso permAddAdmin = Permiso_BRL.getPermisoByDescription("Añadir Peliculas");
 
-       
+
         if (!AdmiPermiso_BRL.tienePermiso(obj.UserId, permAddAdmin.PermisoId))
         {
-            itemAddAdmi.Visible = false;
-        } else
-        {
-            itemAddAdmi.Visible = true;
-        }
-
-        //Validacion si puede Editar Admins
-        permAddAdmin = Permiso_BRL.getPermisoByDescription("Editar Administrador");
-        if ((!AdmiPermiso_BRL.tienePermiso(obj.UserId, permAddAdmin.PermisoId)))
-        {
-            GridAdmins.Columns[5].Visible = false;
+            itemAddPelicula.Visible = false;
         }
         else
         {
-            GridAdmins.Columns[5].Visible = true;
+            itemAddPelicula.Visible = true;
+        }
+
+        //Validacion si puede Editar Admins
+        permAddAdmin = Permiso_BRL.getPermisoByDescription("Editar Peliculas");
+        if ((!AdmiPermiso_BRL.tienePermiso(obj.UserId, permAddAdmin.PermisoId)))
+        {
+            GridPeliculas.Columns[4].Visible = false;
+        }
+        else
+        {
+            GridPeliculas.Columns[4].Visible = true;
         }
 
         //Validacion si puede eliminar Admins
-        permAddAdmin = Permiso_BRL.getPermisoByDescription("Eliminar Administrador");
+        permAddAdmin = Permiso_BRL.getPermisoByDescription("Eliminar Peliculas");
         if ((!AdmiPermiso_BRL.tienePermiso(obj.UserId, permAddAdmin.PermisoId)))
         {
-            GridAdmins.Columns[6].Visible = false;
-        } else
+            GridPeliculas.Columns[5].Visible = false;
+        }
+        else
         {
-            GridAdmins.Columns[6].Visible = true;
+            GridPeliculas.Columns[5].Visible = true;
         }
 
-        cargarAdmins();
 
+
+        cargarPeliculas();
         if (!IsPostBack)
         {
-            cargarAdmins();
             Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
             Response.Cache.SetAllowResponseInBrowserHistory(false);
             Response.Cache.SetNoStore();
         }
     }
 
-    protected void GridAdmins_RowCommand(object sender, GridViewCommandEventArgs e)
+    protected void GridPeliculas_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        int UserAdmId = 0;
+        int peliculaId = 0;
         try
         {
-            UserAdmId = Convert.ToInt32(e.CommandArgument);
+            peliculaId = Convert.ToInt32(e.CommandArgument);
         }
         catch (Exception ex)
         {
 
         }
-        if (UserAdmId <= 0)
+        if (peliculaId <= 0)
             return;
 
         if (e.CommandName == "Eliminar")
         {
             try
             {
-                AdmiPermiso_BRL.deleteAdmiPermisAll(UserAdmId);
-                UserADM_BRL.deleteUserADM(UserAdmId);
-                cargarAdmins();
+                Pelicula_BRL.DeletePelicula(peliculaId);
+                cargarPeliculas();
             }
             catch (Exception ex)
             {
@@ -90,15 +90,15 @@ public partial class JoyanaADMI_UsersAdmin_ListAdmins : System.Web.UI.Page
         }
         if (e.CommandName == "Editar")
         {
-            Response.Redirect("~/JoyanaADMI/UsersAdmin/EditAdmi.aspx?Id=" + UserAdmId.ToString());
+            Response.Redirect("~/JoyanaADMI/Peliculas/FormPeliculas.aspx?Id=" + peliculaId.ToString());
             return;
         }
     }
 
-    public void cargarAdmins()
+    public void cargarPeliculas()
     {
-        List<UserADM> admins = UserADM_BRL.GetAdmins();
-        GridAdmins.DataSource = admins;
-        GridAdmins.DataBind();
+        List<Pelicula> listPeliculas = Pelicula_BRL.GetPeliculas();
+        GridPeliculas.DataSource = listPeliculas;
+        GridPeliculas.DataBind();
     }
 }

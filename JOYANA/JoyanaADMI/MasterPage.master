@@ -28,7 +28,7 @@
                     <li role="presentation">
                         <asp:HyperLink runat="server"
                             ForeColor="#212529"
-                            NavigateUrl="~/JoyanaADMI/Productos/ListProductos.aspx"
+                            NavigateUrl="~/JoyanaADMI/Peliculas/ListPeliculas.aspx"
                             Text="Peliculas">
                         </asp:HyperLink>
                     </li>
