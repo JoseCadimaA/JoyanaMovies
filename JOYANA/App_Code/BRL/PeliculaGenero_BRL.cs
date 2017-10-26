@@ -45,4 +45,20 @@ public class PeliculaGenero_BRL
         PeliculaGeneroTableAdapter adapter = new PeliculaGeneroTableAdapter();
         adapter.Delete(obj.PeliculaId, obj.GeneroId); 
     }
+
+    public static List<Pelicula> GetPeliculasByGenero(int generoId)
+    {
+        PeliculaGeneroTableAdapter adapter = new PeliculaGeneroTableAdapter();
+        PeliculaGenero_DS.PeliculaGeneroDataTable table = adapter.GetPeliculasByGenero(generoId);
+
+        List<Pelicula> resultado = new List<Pelicula>();
+        Pelicula temp;
+        foreach (var row in table)
+        {
+            temp = Pelicula_BRL.GetPeliculaByID(row.peliculaId);
+            resultado.Add(temp);
+        }
+
+        return resultado;
+    }
 }

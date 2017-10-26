@@ -5,27 +5,36 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class MelodyUSER_Home : System.Web.UI.Page
+public partial class JoyanaUSER_CatalogoPelicula : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        string cadGeneroId = Request.Params["Id"];
+        if (String.IsNullOrEmpty(cadGeneroId))
+        {
+            return;
+        }
+
+        int idGenero = Convert.ToInt32(cadGeneroId);
+        Genero obj = Genero_BRL.GetGeneroByID(idGenero);
+        lbTitle.InnerText = obj.Nombre;
+
+        cargarPeliculas(idGenero);
         if (!IsPostBack)
         {
-            cargarPeliculas();
+            
             Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
             Response.Cache.SetAllowResponseInBrowserHistory(false);
             Response.Cache.SetNoStore();
         }
     }
 
-
-    public void cargarPeliculas()
+    public void cargarPeliculas(int idGenero)
     {
-        List<Pelicula> listPeliculas = Pelicula_BRL.GetPeliculas();
+        List<Pelicula> listPeliculas = PeliculaGenero_BRL.GetPeliculasByGenero(idGenero);
         ListPeliculas.DataSource = listPeliculas;
         ListPeliculas.DataBind();
     }
-
 
     protected void ListPeliculas_ItemCommand(object source, RepeaterCommandEventArgs e)
     {

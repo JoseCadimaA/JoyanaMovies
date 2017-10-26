@@ -31,4 +31,28 @@ public class Genero_BRL
         }
         return resultado;
     }
+
+    public static Genero GetGeneroByID(int generoId) {
+        if (generoId <= 0)
+        {
+            throw new ArgumentException("El GeneroId no debe ser negativo");
+        }
+
+        GeneroTableAdapter adapter = new GeneroTableAdapter();
+        Genero_DS.GeneroDataTable table = adapter.GetGeneroByID(generoId);
+
+        if (table.Rows.Count == 0)
+        {
+            return null;
+        }
+
+        Genero_DS.GeneroRow row = table[0];
+        Genero temp = new Genero()
+        {
+            GeneroId = row.generoId,
+            Nombre = row.nombre
+        };
+
+        return temp;
+    }
 }

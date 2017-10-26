@@ -14,7 +14,7 @@
                 </asp:HyperLink>
 
                 <asp:GridView ID="GridPeliculas" runat="server"
-                    OnRowCommand="GridPeliculas_RowCommand"
+                    OnRowCommand="GridPeliculas_RowCommand"                    
                     AutoGenerateColumns="false"
                     CssClass="table"
                     GridLines="None">

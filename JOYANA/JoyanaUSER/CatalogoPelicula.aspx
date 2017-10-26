@@ -1,20 +1,23 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/JoyanaUSER/MasterPage.master" AutoEventWireup="true" CodeFile="Home.aspx.cs" Inherits="MelodyUSER_Home" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/JoyanaUSER/MasterPage.master" AutoEventWireup="true" CodeFile="CatalogoPelicula.aspx.cs" Inherits="JoyanaUSER_CatalogoPelicula" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <br />
-    <h1 runat="server" id="title">HOME</h1><br />
+    <h1 runat="server" id="lbTitle"></h1>
+    <br />
 
     <asp:Repeater ID="ListPeliculas" runat="server" OnItemCommand="ListPeliculas_ItemCommand">
         <ItemTemplate>
             <asp:LinkButton ID="itemShowPelicula" runat="server"
-                CommandName="VerPelicula"                
+                CommandName="VerPelicula"
                 CommandArgument='<%# Eval("PeliculaId") %>'>
                 <div runat="server" align="center" class="divItem"
                     style="display: inline-flex; margin: 5px; border-radius: 4px;">
                     <table>
                         <tr>
                             <td>
-                                <asp:Image ID="ImgPortada" runat="server" ImageUrl='<%# Eval("Foto")%>' Width="190" Height="300"/><br />
+                                <asp:Image ID="ImgPortada" runat="server" ImageUrl='<%# Eval("Foto")%>' Width="190" Height="300" /><br />
                             </td>
                         </tr>
                         <tr>
