@@ -7,9 +7,16 @@ using System.Web.UI.WebControls;
 
 public partial class MelodyADMIN_MasterPage : System.Web.UI.MasterPage
 {
-
+    string text = "";
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (IsPostBack)
+        {
+            return;
+        }
+        string query = Request.Params["Name"];
+        if (!string.IsNullOrEmpty(query))
+            txtSearch.Text = query;
 
         UserCLI obj = (UserCLI)Session["User"];
 
@@ -39,7 +46,10 @@ public partial class MelodyADMIN_MasterPage : System.Web.UI.MasterPage
         }
 
         LitCategories.Text = cad;
+    }     
+
+    protected void btnBuscar_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("CatalogoBusqueda.aspx?Name=" + txtSearch.Text);
     }
-
-
 }

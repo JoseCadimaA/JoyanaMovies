@@ -59,6 +59,32 @@ public class Pelicula_BRL
         return resultado;
     }
 
+    public static List<Pelicula> GetBusqueda(string nombre)
+    {
+        PeliculasTableAdapter adapter = new PeliculasTableAdapter();
+        Pelicula_DS.PeliculasDataTable table = adapter.GetBusqueda(nombre);
+
+        List<Pelicula> resultado = new List<Pelicula>();
+        Pelicula temp; 
+        foreach (var row in table)
+        {
+            temp = new Pelicula()
+            {
+                PeliculaId = row.peliculaId,
+                Nombre = row.nombre,
+                Precio = row.precio,
+                Descripcion = row.descripcion,
+                Director = row.director,
+                Elenco = row.elenco,
+                Foto = row.foto,
+                Estado = row.estado
+            };
+
+            resultado.Add(temp);
+        }
+
+        return resultado;
+    }
     public static void UpdatePelicula(Pelicula obj)
     {
         if (obj == null)
