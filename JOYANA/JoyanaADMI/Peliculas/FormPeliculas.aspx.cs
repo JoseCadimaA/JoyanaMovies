@@ -38,7 +38,10 @@ public partial class JoyanaADMI_Peliculas_FormPeliculas : System.Web.UI.Page
             imgPelicula.ImageUrl = objSelected.Foto;
 
             txtNombrePel.Text = objSelected.Nombre;
-            txtPrecio.Text = objSelected.Precio.ToString(CultureInfo.InvariantCulture);
+            txtPrecioVenta.Text = objSelected.PrecioVenta.ToString(CultureInfo.InvariantCulture);
+            txtPrecioAlqui.Text = objSelected.PrecioAlquiler.ToString(CultureInfo.InvariantCulture);
+            txtTrailerCode.Text = objSelected.TrailerCode;
+            txtMovieCode.Text = objSelected.MovieCode;
             txtDirector.Text = objSelected.Director;
             txtElenco.Text = objSelected.Elenco;
             txtDescripción.Text = objSelected.Descripcion;
@@ -68,7 +71,10 @@ public partial class JoyanaADMI_Peliculas_FormPeliculas : System.Web.UI.Page
             lbVal.Text = "";
             lbValFile.Text = "";
             string nombre = txtNombrePel.Text.Trim();
-            decimal precio = Convert.ToDecimal(txtPrecio.Text.Trim(), CultureInfo.InvariantCulture);
+            decimal precioVenta = Convert.ToDecimal(txtPrecioVenta.Text.Trim(), CultureInfo.InvariantCulture);
+            decimal precioAlquiler = Convert.ToDecimal(txtPrecioAlqui.Text.Trim(), CultureInfo.InvariantCulture);
+            string trailerCode = txtTrailerCode.Text.Trim();
+            string movieCode = txtMovieCode.Text.Trim(); 
             string descripcion = txtDescripción.Text.Trim();
             string director = txtDirector.Text.Trim();
             string elenco = txtElenco.Text.Trim();
@@ -79,6 +85,16 @@ public partial class JoyanaADMI_Peliculas_FormPeliculas : System.Web.UI.Page
             if (String.IsNullOrEmpty(nombre))
             {
                 lbVal.Text = "La casilla Nombre no debe de estar vacía";
+                return;
+            }
+            if (String.IsNullOrEmpty(trailerCode))
+            {
+                lbVal.Text = "La casilla TrailerCODE no debe de estar vacía";
+                return;
+            }
+            if (String.IsNullOrEmpty(movieCode))
+            {
+                lbVal.Text = "La casilla MovieCODE no debe de estar vacía";
                 return;
             }
             if (String.IsNullOrEmpty(director))
@@ -108,7 +124,10 @@ public partial class JoyanaADMI_Peliculas_FormPeliculas : System.Web.UI.Page
                 objSelected = new Pelicula();
             }
             objSelected.Nombre = nombre;
-            objSelected.Precio = precio;
+            objSelected.PrecioVenta = precioVenta;
+            objSelected.PrecioAlquiler = precioAlquiler;
+            objSelected.TrailerCode = trailerCode;
+            objSelected.MovieCode = movieCode;
             objSelected.Descripcion = descripcion;
             objSelected.Director = director;
             objSelected.Elenco = elenco;

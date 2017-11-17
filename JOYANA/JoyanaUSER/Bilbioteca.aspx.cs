@@ -5,14 +5,18 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class MelodyUSER_Home : System.Web.UI.Page
+public partial class JoyanaUSER_Bilbioteca : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        UserCLI obj = (UserCLI)Session["User"];
+        if (obj == null)
+        {            
+            return;
+        }
         if (!IsPostBack)
         {
-            cargarPeliculas();
+            cargarPeliculas(obj.UserId);
             Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
             Response.Cache.SetAllowResponseInBrowserHistory(false);
             Response.Cache.SetNoStore();
@@ -20,15 +24,7 @@ public partial class MelodyUSER_Home : System.Web.UI.Page
     }
 
 
-    public void cargarPeliculas()
-    {
-        List<Pelicula> listPeliculas = Pelicula_BRL.GetPeliculas();
-        ListPeliculas.DataSource = listPeliculas;
-        ListPeliculas.DataBind();
-    }
-
-
-    protected void ListPeliculas_ItemCommand(object source, RepeaterCommandEventArgs e)
+    protected void ListBiblioteca_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         int peliculaId = 0;
         try
@@ -42,10 +38,17 @@ public partial class MelodyUSER_Home : System.Web.UI.Page
         if (peliculaId <= 0)
             return;
 
-        if (e.CommandName == "VerPelicula")
+        if (e.CommandName == "ViewMovie")
         {
-            Response.Redirect("~/JoyanaUSER/DetallePelicula.aspx?Id=" + peliculaId.ToString());
+            Response.Redirect("MovieView.aspx?Id=" + peliculaId.ToString());
             return;
         }
+    }
+
+    public void cargarPeliculas(int UserId)
+    {
+        List<Transaction> listTransact = Compra_BRL.GetAllTransactionByUserId(UserId);
+        ListBiblioteca.DataSource = listTransact;
+        ListBiblioteca.DataBind();
     }
 }

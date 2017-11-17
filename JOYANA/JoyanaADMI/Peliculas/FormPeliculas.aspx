@@ -29,20 +29,56 @@
 
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon">Precio de la Película:</span>
-                <asp:TextBox ID="txtPrecio" runat="server" TextMode="Number"
+                <span class="input-group-addon">Precio de Venta:</span>
+                <asp:TextBox ID="txtPrecioVenta" runat="server" TextMode="Number"
                     CssClass="form-control"
-                    placeholder="Ingrese el Precio de la Película"> 
+                    placeholder="Ingrese el Precio de Venta de la Película"> 
                 </asp:TextBox>
             </div>
             <asp:CompareValidator runat="server"
-                ControlToValidate="txtPrecio"
+                ControlToValidate="txtPrecioVenta"
                 Display="Dynamic"
                 ForeColor="Red"
                 ValueToCompare="0"
                 Operator="GreaterThanEqual"
-                ErrorMessage="El precio debe ser Positivo">
+                ErrorMessage="El precio de venta debe ser Positivo">
             </asp:CompareValidator>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">Precio de Alquiler:</span>
+                <asp:TextBox ID="txtPrecioAlqui" runat="server" TextMode="Number"
+                    CssClass="form-control"
+                    placeholder="Ingrese el Precio de Alquiler de la Película"> 
+                </asp:TextBox>
+            </div>
+            <asp:CompareValidator runat="server"
+                ControlToValidate="txtPrecioAlqui"
+                Display="Dynamic"
+                ForeColor="Red"
+                ValueToCompare="0"
+                Operator="GreaterThanEqual"
+                ErrorMessage="El precio de alquiler debe ser Positivo">
+            </asp:CompareValidator>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">Trailer CODE</span>
+                <asp:TextBox ID="txtTrailerCode" runat="server"
+                    CssClass="form-control"
+                    placeholder="Ingrese el Codigo del Trailer"> </asp:TextBox>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">Movie CODE:</span>
+                <asp:TextBox ID="txtMovieCode" runat="server"
+                    CssClass="form-control"
+                    placeholder="Ingrese el Codido de la Pelicula"> </asp:TextBox>
+            </div>
         </div>
 
         <div class="form-group">

@@ -21,7 +21,8 @@
                     <Columns>
                         <asp:ImageField DataImageUrlField="Foto" HeaderText="Foto Portada" ControlStyle-Width="60px"></asp:ImageField>
                         <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                        <asp:BoundField DataField="Precio" HeaderText="Precio" />
+                        <asp:BoundField DataField="PrecioVenta" HeaderText="Precio de Venta" />
+                        <asp:BoundField DataField="PrecioAlquiler" HeaderText="Precio de Alquiler" />
                         <asp:BoundField DataField="Director" HeaderText="Director" />                        
                         <asp:TemplateField HeaderText="Editar">
                             <ItemTemplate>

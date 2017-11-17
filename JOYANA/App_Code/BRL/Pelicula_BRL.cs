@@ -22,7 +22,7 @@ public class Pelicula_BRL
 
         int? peliculaId = 0;
         PeliculasTableAdapter adapter = new PeliculasTableAdapter();
-        adapter.Insert(obj.Nombre, obj.Precio, obj.Descripcion, obj.Director, obj.Elenco, obj.Foto, obj.Estado, ref peliculaId);
+        adapter.Insert(obj.Nombre, obj.PrecioVenta, obj.PrecioAlquiler, obj.Descripcion, obj.Director, obj.Elenco, obj.Foto, obj.TrailerCode, obj.MovieCode, obj.Estado, ref peliculaId);        
 
         if (peliculaId <= 0)
         {
@@ -45,11 +45,14 @@ public class Pelicula_BRL
                 {
                     PeliculaId = row.peliculaId,
                     Nombre = row.nombre,
-                    Precio = row.precio,
+                    PrecioVenta = row.precioVenta,
+                    PrecioAlquiler = row.precioAlquiler,
                     Descripcion = row.descripcion,
                     Director = row.director,
                     Elenco = row.elenco,
                     Foto = row.foto,
+                    TrailerCode = row.trailerCode,
+                    MovieCode = row.movieCode,
                     Estado = row.estado
                 };
                 resultado.Add(obj);
@@ -72,11 +75,14 @@ public class Pelicula_BRL
             {
                 PeliculaId = row.peliculaId,
                 Nombre = row.nombre,
-                Precio = row.precio,
+                PrecioVenta = row.precioVenta,
+                PrecioAlquiler = row.precioAlquiler,
                 Descripcion = row.descripcion,
                 Director = row.director,
                 Elenco = row.elenco,
                 Foto = row.foto,
+                TrailerCode = row.trailerCode,
+                MovieCode = row.movieCode,
                 Estado = row.estado
             };
 
@@ -93,7 +99,7 @@ public class Pelicula_BRL
         }
 
         PeliculasTableAdapter adapter = new PeliculasTableAdapter();
-        adapter.Update(obj.Nombre, obj.Precio, obj.Descripcion, obj.Director, obj.Elenco, obj.Foto, obj.PeliculaId);
+        adapter.Update(obj.Nombre, obj.PrecioVenta, obj.PrecioAlquiler, obj.Descripcion, obj.Director, obj.Elenco, obj.Foto, obj.TrailerCode, obj.MovieCode, obj.PeliculaId);        
     }
 
     public static void DeletePelicula(int peliculaId)
@@ -127,11 +133,14 @@ public class Pelicula_BRL
         {
             PeliculaId = row.peliculaId,
             Nombre = row.nombre,
-            Precio = row.precio,
+            PrecioVenta = row.precioVenta,
+            PrecioAlquiler = row.precioAlquiler,
             Descripcion = row.descripcion,
             Director = row.director,
             Elenco = row.elenco,
             Foto = row.foto,
+            TrailerCode = row.trailerCode,
+            MovieCode = row.movieCode,
             Estado = row.estado
         };
 
