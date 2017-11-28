@@ -12,10 +12,14 @@ public partial class JoyanaUSER_DetallePelicula : System.Web.UI.Page
     Pelicula objSelected;
     Compra tempCompra;
     Alquiler tempAlquiler;
+    Like tempLike;
+    
     protected void Page_Load(object sender, EventArgs e)
     {
         userLogeado = (UserCLI)Session["User"];
-        //lbValidator.Visible = false;        
+        
+        LikeIcon.Text = "<i class='fa fa-thumbs-o-up'></i>"; //No selected
+        DislikeIcon.Text = "<i class='fa fa-thumbs-o-down'></i>"; //No selected
         if (!IsPostBack)
         {
             objSelected = null;
@@ -24,17 +28,22 @@ public partial class JoyanaUSER_DetallePelicula : System.Web.UI.Page
             Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
             Response.Cache.SetAllowResponseInBrowserHistory(false);
             Response.Cache.SetNoStore();
-        }       
+        }
+        
 
         string cadPeliculaId = Request.Params["Id"];
         if (String.IsNullOrEmpty(cadPeliculaId))
         {
             lbNombrePeli.InnerText = "Error 404 Not Found";
             return;
-        }
+        }        
 
         int idPelicula = Convert.ToInt32(cadPeliculaId);
         objSelected = Pelicula_BRL.GetPeliculaByID(idPelicula);
+        cargarComentarios();
+
+        lbCantLikes.Text = Like_BRL.GetCantLikes(objSelected.PeliculaId) + " ";
+        lbCantDislikes.Text = Like_BRL.GetCantDisLikes(objSelected.PeliculaId) + "";
 
         Youtube.Src = "https://www.youtube.com/embed/" + objSelected.TrailerCode;
         lbNombrePeli.InnerText = objSelected.Nombre;
@@ -42,13 +51,43 @@ public partial class JoyanaUSER_DetallePelicula : System.Web.UI.Page
         txtDirector.InnerText = objSelected.Director;
         txtElenco.InnerText = objSelected.Elenco;
         txtPrecioVenta.InnerText = objSelected.PrecioVenta + " BS";
-        txtPrecioAlquiler.InnerText = objSelected.PrecioAlquiler + " BS";
+        txtPrecioAlquiler.InnerText = objSelected.PrecioAlquiler + " BS";        
         if (userLogeado == null)
         {
+            btnLike.Enabled = false;
+            btnDislike.Enabled = false;
             btnAlquilarSel.Visible = false;
             btnComprarSel.Visible = false;
+            FormComent.Visible = false;
             return;
         }
+
+        //CODE THE LIKE VALIDATION        
+
+        btnLike.Enabled = true;
+        btnDislike.Enabled = true;
+
+        tempLike = Like_BRL.GetLikeByUserPeliculaID(userLogeado.UserId, objSelected.PeliculaId);
+        
+        if (tempLike == null)
+        {            
+            LikeIcon.Text = "<i class='fa fa-thumbs-o-up'></i>"; //No selected
+            DislikeIcon.Text = "<i class='fa fa-thumbs-o-down'></i>"; //No selected
+        } else
+        {
+            
+            if (tempLike.IsLike)
+            {
+                LikeIcon.Text = "<i class='fa fa-thumbs-up'></i>"; //SELECTED
+                DislikeIcon.Text = "<i class='fa fa-thumbs-o-down'></i>"; //No selected
+            } else
+            {
+                LikeIcon.Text = "<i class='fa fa-thumbs-o-up'></i>"; //No selected
+                DislikeIcon.Text = "<i class='fa fa-thumbs-down'></i>"; //SELECCIONADO
+            }
+        }        
+
+        FormComent.Visible = true;
 
         tempCompra = Compra_BRL.GetTransaction(userLogeado.UserId, objSelected.PeliculaId);
         if (tempCompra != null)
@@ -73,6 +112,14 @@ public partial class JoyanaUSER_DetallePelicula : System.Web.UI.Page
         txtNombrePropie.Text = userLogeado.Nombre + " " + userLogeado.Apellido;
         alq_txtNomPropie.Text = userLogeado.Nombre + " " + userLogeado.Apellido;        
         alq_txtCostoAlquixDia.Text = objSelected.PrecioAlquiler + " BS";
+        
+    }
+
+    public void cargarComentarios()
+    {
+        List<Comentario> listComents = Comentario_BRL.GetComentariosByPeliculaID(objSelected.PeliculaId);
+        ListComents.DataSource = listComents;
+        ListComents.DataBind();
     }
 
     protected void btnConfirmCompra_Click(object sender, EventArgs e)
@@ -147,5 +194,83 @@ public partial class JoyanaUSER_DetallePelicula : System.Web.UI.Page
 
         tempAlquiler = null;
         Response.Redirect("DetallePelicula.aspx?Id=" + objSelected.PeliculaId);
+    }
+
+    protected void btnLike_Click(object sender, EventArgs e)
+    {        
+        if (tempLike == null) //Si nunca le dio like
+        {
+            tempLike = new Like()
+            {
+                IsLike = true,
+                UserID = userLogeado.UserId,
+                PeliculaID = objSelected.PeliculaId
+            };
+
+            Like_BRL.InsertLike(tempLike);
+        } else //Si ya le doy like antes
+        {
+            if (tempLike.IsLike) //Si es like eliminar
+            {                
+                Like_BRL.DeleteLike(tempLike.LikeID);
+                tempLike = null;
+            } else //Si ya le habian dado dislike pues actualizo y lo vuelvo like
+            {
+                tempLike.IsLike = true;
+                Like_BRL.UpdateLike(tempLike);
+            }
+        }
+        Response.Redirect("DetallePelicula.aspx?Id=" + objSelected.PeliculaId);
+    }
+
+    protected void btnDislike_Click(object sender, EventArgs e)
+    {
+        if (tempLike == null)
+        {
+            tempLike = new Like()
+            {
+                IsLike = false,
+                UserID = userLogeado.UserId,
+                PeliculaID = objSelected.PeliculaId
+            };
+            Like_BRL.InsertLike(tempLike);
+        } else
+        {
+            if (tempLike.IsLike)
+            {
+                tempLike.IsLike = false;
+                Like_BRL.UpdateLike(tempLike);
+            } else
+            {
+                Like_BRL.DeleteLike(tempLike.LikeID);
+                tempLike = null;
+            }
+        }
+
+        Response.Redirect("DetallePelicula.aspx?Id=" + objSelected.PeliculaId);
+    }
+
+
+    protected void btnComent_Click(object sender, EventArgs e)
+    {
+        string coment = txtComent.Text.Trim();
+        if (string.IsNullOrEmpty(coment))
+        {
+            return;
+        }
+
+        Comentario obj = new Comentario()
+        {
+            textComent = coment,
+            Fecha = DateTime.Now,
+            UserID = userLogeado.UserId,
+            PeliculaID = objSelected.PeliculaId,
+        };
+        
+
+        Comentario_BRL.InsertComentario(obj);
+
+        txtComent.Text = "";
+        cargarComentarios();
     }
 }

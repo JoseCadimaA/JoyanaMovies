@@ -50,6 +50,7 @@
         </div>
     </form>
 
-
+    <script type="text/javascript" src="../Style/js/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="../Style/js/bootstrap.js"></script>
 </asp:Content>
 

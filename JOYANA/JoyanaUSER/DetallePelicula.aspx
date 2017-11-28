@@ -4,45 +4,96 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <div class="container" style="margin-left: auto; margin-top: 20px; width: 95%;" runat="server">
-        <iframe width="990" height="500" frameborder="0" allowfullscreen runat="server" id="Youtube"></iframe>
+    <div class="row" style="margin-left: auto; margin-right: auto; margin-top: 20px; width: 95%;" runat="server">
+        <iframe width="1013" height="500" frameborder="0" allowfullscreen runat="server" id="Youtube"></iframe>
 
-        <div class="container" style="margin-left: auto; margin-top: 20px; width: 70%; background: #dedada; border-radius: 4px; padding-top: 5px;" runat="server">
-            <h3 runat="server" id="lbNombrePeli" style="margin-bottom: 10px" class="text-center"></h3>
-            <asp:Label ID="lbDescricion" runat="server" Text="DESCRIPCIÓN:" Font-Bold="true"></asp:Label>
-            <p runat="server" id="txtDecripcion"></p>
-
-            <asp:Label ID="lbDirector" runat="server" Text="DIRECTOR:" Font-Bold="true"></asp:Label>
-            <p runat="server" id="txtDirector"></p>
-
-            <asp:Label ID="lbElenco" runat="server" Text="ELENCO PARTICIPANTE:" Font-Bold="true"></asp:Label>
-            <p runat="server" id="txtElenco"></p>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <asp:Label ID="lbPrecioVenta" runat="server" Text="PRECIO DE VENTA:" Font-Bold="true"></asp:Label>
-                    <p runat="server" id="txtPrecioVenta"></p>
+        <div class="col-md-6" style="margin-top: 20px; background: #eeeeee; border-radius: 4px; padding-top: 5px;" runat="server">
+            <div style="overflow: hidden">
+                <div class="pull-left">
+                    <h3 runat="server" id="lbNombrePeli" style="margin-bottom: 10px" class="text-left"></h3>
                 </div>
-                <div class="col-md-6">
-                    <asp:Label ID="lbPrecioAlquiler" runat="server" Text="PRECIO DE ALQUILER:" Font-Bold="true"></asp:Label>
-                    <p runat="server" id="txtPrecioAlquiler"></p>
+
+                <div class="pull-right">
+                    
+                    <asp:LinkButton runat="server" ID="btnLike" CssClass="btn btn-primary" OnClick="btnLike_Click">
+                        <%--<i class="fa fa-thumbs-up"></i>--%>
+                        <asp:Literal runat="server" ID="LikeIcon"></asp:Literal>
+                    </asp:LinkButton>
+                    <asp:Label runat="server" id="lbCantLikes"></asp:Label>
+
+                    
+                    <asp:LinkButton runat="server" ID="btnDislike" CssClass="btn btn-primary" style="margin-left: 5px" OnClick="btnDislike_Click">
+                        <%--<i class="fa fa-thumbs-o-down"></i>--%>
+                        <asp:Literal runat="server" ID="DislikeIcon"></asp:Literal>
+                    </asp:LinkButton>
+                    <asp:Label runat="server" id="lbCantDislikes"></asp:Label>
+
+                </div>
+            </div>
+
+            <div>
+                <asp:Label ID="lbDescricion" runat="server" Text="DESCRIPCIÓN:" Font-Bold="true"></asp:Label>
+                <p runat="server" id="txtDecripcion"></p>
+
+                <asp:Label ID="lbDirector" runat="server" Text="DIRECTOR:" Font-Bold="true"></asp:Label>
+                <p runat="server" id="txtDirector"></p>
+
+                <asp:Label ID="lbElenco" runat="server" Text="ELENCO PARTICIPANTE:" Font-Bold="true"></asp:Label>
+                <p runat="server" id="txtElenco"></p>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <asp:Label ID="lbPrecioVenta" runat="server" Text="PRECIO DE VENTA:" Font-Bold="true"></asp:Label>
+                        <p runat="server" id="txtPrecioVenta"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <asp:Label ID="lbPrecioAlquiler" runat="server" Text="PRECIO DE ALQUILER:" Font-Bold="true"></asp:Label>
+                        <p runat="server" id="txtPrecioAlquiler"></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div runat="server" id="btnComprarSel">
+                            <asp:Button class="btn btn-dark btn-block" data-target="#detalleCompra" data-toggle="modal">COMPRAR</asp:Button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div runat="server" id="btnAlquilarSel">
+                            <asp:Button class="btn btn-danger btn-block" data-target="#detalleAlquiler" data-toggle="modal">ALQUILAR</asp:Button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div runat="server" id="btnComprarSel">
-                        <asp:Button class="btn btn-dark btn-block" data-target="#detalleCompra" data-toggle="modal">COMPRAR</asp:Button>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div runat="server" id="btnAlquilarSel">
-                        <asp:Button class="btn btn-danger btn-block" data-target="#detalleAlquiler" data-toggle="modal">ALQUILAR</asp:Button>
-                    </div>
-                </div>
-            </div>
             <br />
         </div>
+
+        <div style="margin-right: auto; margin-top: 20px; width: 70%; background: #f3f3f3; border-radius: 4px; padding-top: 5px;" class="col-md-6" runat="server">
+            <h4>Comentarios</h4>
+            <div id="FormComent" runat="server">
+                <div class="form-group">
+                    <asp:TextBox CssClass="form-control" placeholder="Añadir comentario público ..." runat="server" ID="txtComent" TextMode="MultiLine" Rows="4"></asp:TextBox>
+                </div>
+                <asp:Button runat="server" ID="btnComent" CssClass="btn btn-primary pull-right" OnClick="btnComent_Click" Text="Comentar" />
+                <br />
+                <br />
+            </div>
+
+            <div class="row">
+                <asp:Repeater ID="ListComents" runat="server">
+                    <ItemTemplate>
+                        <div class="container" style="border-bottom: 1px solid #c4c4c4; padding-top: 10px">
+                            <%--<asp:Label ID="nameUser" runat="server" Font-Bold="true" Text='<%# Eval("UserName")%>'></asp:Label>--%>
+                            <p><strong><%# Eval("UserName")%>: </strong><%# Eval("textComent")%></p>
+                            <small class="pull-right"><%# Eval("Fecha")%></small>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </div>
+
+        </div>
+
     </div>
 
     <br />

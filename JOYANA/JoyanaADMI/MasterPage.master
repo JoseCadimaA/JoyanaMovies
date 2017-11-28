@@ -52,9 +52,38 @@
                         <asp:HyperLink runat="server"
                             ID="txtPerfilName"
                             ForeColor="#212529"
-                            NavigateUrl="~/JoyanaADMI/UsersAdmin/AdmiPerfil.aspx" 
+                            NavigateUrl="~/JoyanaADMI/UsersAdmin/AdmiPerfil.aspx"
                             Text="Perfil">
                         </asp:HyperLink>
+                    </li>
+
+                    <li role="presentation" class="dropdown" runat="server">
+                        <asp:HyperLink runat="server" CssClass="dropdown-toggle" data-toggle="dropdown" 
+                            ID="HyperLink3"
+                            NavigateUrl="#"
+                            ForeColor="#212529">
+                            Transacciones
+                            <span class="caret"></span>
+                        </asp:HyperLink>                        
+                        <ul class="dropdown-menu">
+                            <li role="presentation">
+                                <asp:HyperLink runat="server"
+                                    ID="HyperLink1"
+                                    ForeColor="#212529"
+                                    NavigateUrl="~/JoyanaADMI/UsersAdmin/AdmiPerfil.aspx"
+                                    Text="Compras">
+                                </asp:HyperLink>
+                            </li>
+                            <li class="divider"></li>
+                            <li role="presentation">
+                                <asp:HyperLink runat="server"
+                                    ID="HyperLink2"
+                                    ForeColor="#212529"
+                                    NavigateUrl="~/JoyanaADMI/UsersAdmin/AdmiPerfil.aspx"
+                                    Text="Alquileres">
+                                </asp:HyperLink>
+                            </li>
+                        </ul>
                     </li>
 
                 </ul>
@@ -82,7 +111,7 @@
                 </p>
             </h2>
         </div>
-    </footer>
-    <script src="Style/js/jquery-2.1.4.js"></script>
+    </footer>    
+    
 </body>
 </html>
