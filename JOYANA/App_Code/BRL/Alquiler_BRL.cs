@@ -85,19 +85,20 @@ public class Alquiler_BRL
         Alquiler temp;
         foreach (var row in table)
         {
-            temp = new Alquiler()
-            {
-                AlquilerId = row.AlquilerId,
-                TotalPago = row.totalPago,
-                FechaAlqui = row.fechaAlqui,
-                FechaDevol = row.fechaDevol,
-                TarjetaCredito = row.tarjetaCredito,
-                CodigoTarjeta = row.codigoTarjeta,
-                Estado = row.estado,
-                UserId = row.UserId,
-                PeliculaId = row.peliculaId
-            };
-
+            temp = new Alquiler();
+            temp.AlquilerId = row.AlquilerId;
+            temp.TotalPago = row.totalPago;
+            temp.FechaAlqui = row.fechaAlqui;
+            temp.FechaDevol = row.fechaDevol;
+            temp.TarjetaCredito = row.tarjetaCredito;
+            temp.CodigoTarjeta = row.codigoTarjeta;
+            temp.Estado = row.estado;
+            temp.UserId = row.UserId;
+            UserCLI userTemp = UserCLI_BRL.getUserById(row.UserId);
+            temp.Email = userTemp.Email;
+            temp.PeliculaId = row.peliculaId;
+            Pelicula moviesTemp = Pelicula_BRL.GetPeliculaByID(row.peliculaId);
+            temp.NombrePelicula = moviesTemp.Nombre;
             result.Add(temp);
         }
 

@@ -39,17 +39,19 @@ public class Compra_BRL
         Compra temp;
         foreach (var row in table)
         {
-            temp = new Compra()
-            {
-                CompraId = row.CompraId,
-                Fecha = row.fecha,
-                TotalPago = row.totalPago,
-                TarjetaCredito = row.tarjetaCredito,
-                CodigoTarjeta = row.codigoTarjeta,
-                Estado = row.estado,
-                UserId = row.UserId,
-                PeliculaId = row.peliculaId
-            };
+            temp = new Compra();
+            temp.CompraId = row.CompraId;
+            temp.Fecha = row.fecha;
+            temp.TotalPago = row.totalPago;
+            temp.TarjetaCredito = row.tarjetaCredito;
+            temp.CodigoTarjeta = row.codigoTarjeta;
+            temp.Estado = row.estado;
+            temp.UserId = row.UserId;
+            UserCLI userTemp = UserCLI_BRL.getUserById(row.UserId);
+            temp.Email = userTemp.Email;
+            temp.PeliculaId = row.peliculaId;
+            Pelicula moviesTemp = Pelicula_BRL.GetPeliculaByID(row.peliculaId);
+            temp.NombrePelicula = moviesTemp.Nombre;
 
             result.Add(temp);
 
@@ -101,17 +103,21 @@ public class Compra_BRL
 
         Compra_DS.CompraRow row = table[0];
 
-        Compra obj = new Compra()
-        {
-            CompraId = row.CompraId,
-            Fecha = row.fecha,
-            TotalPago = row.totalPago,
-            TarjetaCredito = row.tarjetaCredito,
-            CodigoTarjeta = row.codigoTarjeta,
-            Estado = row.estado,
-            UserId = row.UserId,
-            PeliculaId = row.peliculaId
-        };
+        Compra obj = new Compra();
+        obj.CompraId = row.CompraId;
+        obj.Fecha = row.fecha;
+        obj.TotalPago = row.totalPago;
+        obj.TarjetaCredito = row.tarjetaCredito;
+        obj.CodigoTarjeta = row.codigoTarjeta;
+        obj.Estado = row.estado;
+        obj.UserId = row.UserId;
+        UserCLI userTemp = UserCLI_BRL.getUserById(row.UserId);
+        obj.Email = userTemp.Email;
+        obj.PeliculaId = row.peliculaId;
+        Pelicula movieTemp = Pelicula_BRL.GetPeliculaByID(row.peliculaId);
+        obj.NombrePelicula = movieTemp.Nombre;
+
+
 
         return obj;
     }
@@ -129,17 +135,19 @@ public class Compra_BRL
         Compra temp;
         foreach (var row in table)
         {
-            temp = new Compra()
-            {
-                CompraId = row.CompraId,
-                Fecha = row.fecha,
-                TotalPago = row.totalPago,
-                TarjetaCredito = row.tarjetaCredito,
-                CodigoTarjeta = row.codigoTarjeta,
-                Estado = row.estado,
-                UserId = row.UserId,
-                PeliculaId = row.peliculaId
-            };
+            temp = new Compra();
+            temp.CompraId = row.CompraId;
+            temp.Fecha = row.fecha;
+            temp.TotalPago = row.totalPago;
+            temp.TarjetaCredito = row.tarjetaCredito;
+            temp.CodigoTarjeta = row.codigoTarjeta;
+            temp.Estado = row.estado;
+            temp.UserId = row.UserId;
+            UserCLI userTemp = UserCLI_BRL.getUserById(row.UserId);
+            temp.Email = userTemp.Email;
+            temp.PeliculaId = row.peliculaId;
+            Pelicula moviesTemp = Pelicula_BRL.GetPeliculaByID(row.peliculaId);
+            temp.NombrePelicula = moviesTemp.Nombre;
 
             result.Add(temp);
 
@@ -219,7 +227,8 @@ public class Compra_BRL
                 if (diference > 0)
                 {
                     Alquiler_BRL.DeleteAlquiler(row.AlquilerId);
-                } else
+                }
+                else
                 {
                     tempTransaction = new Transaction();
                     tempTransaction.TotalPago = row.totalPago;
@@ -240,9 +249,9 @@ public class Compra_BRL
 
                     listTransaction.Add(tempTransaction);
                 }
-                
+
             }
-            
+
         }
 
         return listTransaction;

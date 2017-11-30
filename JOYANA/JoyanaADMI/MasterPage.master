@@ -70,7 +70,7 @@
                                 <asp:HyperLink runat="server"
                                     ID="HyperLink1"
                                     ForeColor="#212529"
-                                    NavigateUrl="~/JoyanaADMI/UsersAdmin/AdmiPerfil.aspx"
+                                    NavigateUrl="~/JoyanaADMI/Transaction/ListCompras.aspx"
                                     Text="Compras">
                                 </asp:HyperLink>
                             </li>
@@ -79,7 +79,7 @@
                                 <asp:HyperLink runat="server"
                                     ID="HyperLink2"
                                     ForeColor="#212529"
-                                    NavigateUrl="~/JoyanaADMI/UsersAdmin/AdmiPerfil.aspx"
+                                    NavigateUrl="~/JoyanaADMI/Transaction/ListAlquileres.aspx"
                                     Text="Alquileres">
                                 </asp:HyperLink>
                             </li>

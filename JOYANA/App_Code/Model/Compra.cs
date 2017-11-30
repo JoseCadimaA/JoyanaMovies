@@ -15,7 +15,9 @@ public class Compra
     public string CodigoTarjeta { get; set; }
     public bool Estado { get; set; }
     public int UserId { get; set; }
+    public string Email { get; set; }
     public int PeliculaId { get; set; }
+    public string NombrePelicula { get; set; }
     public Compra()
     {
         //
