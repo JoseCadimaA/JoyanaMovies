@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/JoyanaUSER/MasterPage.master" AutoEventWireup="true" CodeFile="Bilbioteca.aspx.cs" Inherits="JoyanaUSER_Bilbioteca" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">        
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <br />
@@ -17,7 +17,8 @@
                             <asp:Image ID="ImgPortada" runat="server" ImageUrl='<%# Eval("Foto")%>' Height="200px" Width="240px"/>
                         </div>                        
                         <div class="col-md-9">
-                            <h4 style="color:black"><%# Eval("NombrePelicula")%></h4>
+                            
+                            <h4 style="color:black"><%# Eval("NombrePelicula")%><asp:Literal ID="ltLabel" runat="server" Text='<%# Eval("Label")%>'></asp:Literal></h4>                            
                             <p><strong>DIRECTOR: </strong><%# Eval("Director")%></p>
                             <p><strong>DESCRIPCIÓN: </strong><%# Eval("Description")%></p>
                         </div>

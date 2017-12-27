@@ -90,7 +90,7 @@
             <asp:ListItem>Registrar Administrador</asp:ListItem>
             <asp:ListItem>Editar Administrador</asp:ListItem>
             <asp:ListItem>Eliminar Administrador</asp:ListItem>
-            <asp:ListItem>Ver Reportes</asp:ListItem>
+            <%--<asp:ListItem>Ver Reportes</asp:ListItem>--%>
         </asp:CheckBoxList>
         
 

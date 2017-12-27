@@ -32,22 +32,22 @@ public partial class JoyanaADMI_Productos : System.Web.UI.Page
         permAddAdmin = Permiso_BRL.getPermisoByDescription("Editar Peliculas");
         if ((!AdmiPermiso_BRL.tienePermiso(obj.UserId, permAddAdmin.PermisoId)))
         {
-            GridPeliculas.Columns[4].Visible = false;
+            GridPeliculas.Columns[5].Visible = false;
         }
         else
         {
-            GridPeliculas.Columns[4].Visible = true;
+            GridPeliculas.Columns[5].Visible = true;
         }
 
         //Validacion si puede eliminar Admins
         permAddAdmin = Permiso_BRL.getPermisoByDescription("Eliminar Peliculas");
         if ((!AdmiPermiso_BRL.tienePermiso(obj.UserId, permAddAdmin.PermisoId)))
         {
-            GridPeliculas.Columns[5].Visible = false;
+            GridPeliculas.Columns[6].Visible = false;
         }
         else
         {
-            GridPeliculas.Columns[5].Visible = true;
+            GridPeliculas.Columns[6].Visible = true;
         }
 
 

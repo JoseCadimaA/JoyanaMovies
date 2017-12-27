@@ -59,6 +59,7 @@ public partial class JoyanaUSER_DetallePelicula : System.Web.UI.Page
             btnAlquilarSel.Visible = false;
             btnComprarSel.Visible = false;
             FormComent.Visible = false;
+            btnVerPelicula.Visible = false;
             return;
         }
 
@@ -96,6 +97,7 @@ public partial class JoyanaUSER_DetallePelicula : System.Web.UI.Page
             {
                 btnAlquilarSel.Visible = false;
                 btnComprarSel.Visible = false;
+                btnVerPelicula.Visible=true;
             }
         }
 
@@ -106,6 +108,7 @@ public partial class JoyanaUSER_DetallePelicula : System.Web.UI.Page
             {
                 btnAlquilarSel.Visible = false;
                 btnComprarSel.Visible = false;
+                btnVerPelicula.Visible = true;
             }
         }
 
@@ -272,5 +275,10 @@ public partial class JoyanaUSER_DetallePelicula : System.Web.UI.Page
 
         txtComent.Text = "";
         cargarComentarios();
+    }
+
+    protected void btnVerPelicula_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("MovieView.aspx?Id=" + objSelected.PeliculaId);
     }
 }

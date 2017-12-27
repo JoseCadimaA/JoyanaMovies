@@ -210,6 +210,10 @@ public class Compra_BRL
                 tempTransaction.Description = tempMovie.Descripcion;
                 tempTransaction.Director = tempMovie.Director;
                 tempTransaction.Elenco = tempMovie.Elenco;
+                tempTransaction.Label = "<span class='label label-default pull-right'" +
+                        "style='border-radius:3px; background-color:#5cb85c; color:#fff; padding: 6px 3px'" +
+                        ">Venta</span>";
+
 
                 listTransaction.Add(tempTransaction);
             }
@@ -246,6 +250,10 @@ public class Compra_BRL
                     tempTransaction.Description = tempMovie.Descripcion;
                     tempTransaction.Director = tempMovie.Director;
                     tempTransaction.Elenco = tempMovie.Elenco;
+                    tempTransaction.Label = "<span class='label label-default pull-right'" +
+                        "style='border-radius:3px; background-color:#777; color:#fff; padding: 6px 3px'" + 
+                        ">Alquiler</span>";
+
 
                     listTransaction.Add(tempTransaction);
                 }

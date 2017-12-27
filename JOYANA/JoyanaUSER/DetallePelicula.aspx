@@ -64,6 +64,8 @@
                         </div>
                     </div>
                 </div>
+
+                <asp:Button ID="btnVerPelicula" runat="server" Text="Ver Pelicula" CssClass="btn btn-primary btn-block" OnClick="btnVerPelicula_Click" Visible="false"/>
             </div>
 
             <br />

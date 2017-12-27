@@ -103,4 +103,24 @@ public class Like_BRL
 
         return table.Rows.Count;
     }
+
+    public static List<Favoritos> GetFavoritos()
+    {
+        FavoritosTableAdapter adapter = new FavoritosTableAdapter();
+        Like_DS.FavoritosDataTable table = adapter.GetFavoritos();
+
+        List<Favoritos> listFavoritos = new List<Favoritos>();
+        Favoritos temp;
+        foreach (var row in table)
+        {
+            temp = new Favoritos()
+            {
+                NombrePelicula = row.nombre,
+                CantLikes = row.likes
+            };
+
+            listFavoritos.Add(temp);
+        }
+        return listFavoritos;
+    }
 }

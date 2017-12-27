@@ -57,6 +57,15 @@
                         </asp:HyperLink>
                     </li>
 
+                    <li role="presentation">
+                        <asp:HyperLink runat="server"
+                            ID="HyperLink4"
+                            ForeColor="#212529"
+                            NavigateUrl="~/JoyanaADMI/Transaction/ListFavoritos.aspx"
+                            Text="Top 10 Favoritos">
+                        </asp:HyperLink>
+                    </li>
+
                     <li role="presentation" class="dropdown" runat="server">
                         <asp:HyperLink runat="server" CssClass="dropdown-toggle" data-toggle="dropdown" 
                             ID="HyperLink3"

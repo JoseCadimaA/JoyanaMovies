@@ -52,4 +52,10 @@ public partial class MelodyADMIN_MasterPage : System.Web.UI.MasterPage
     {
         Response.Redirect("CatalogoBusqueda.aspx?Name=" + txtSearch.Text);
     }
+
+    protected void btnExit_Click(object sender, EventArgs e)
+    {
+        Session["User"] = null;
+        Response.Redirect("Home.aspx");
+    }
 }

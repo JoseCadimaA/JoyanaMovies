@@ -21,6 +21,7 @@ public class Transaction
     public string Description { get; set; }
     public string Director { get; set; }
     public string Elenco { get; set; }
+    public string Label { get; set; }
     public Transaction()
     {
     }

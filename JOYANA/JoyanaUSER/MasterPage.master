@@ -150,8 +150,8 @@
                     <div class="modal-body">Selecciona "Salir" si de verdad deseas cerrar sesión.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-
-                        <a class="btn btn-primary" href="LoginUser.aspx" runat="server">Salir</a>
+                        <asp:Button ID="btnExit" runat="server" Text="Salir" CssClass="btn btn-primary" OnClick="btnExit_Click"/>
+                        <%--<a class="btn btn-primary" href="LoginUser.aspx" runat="server">Salir</a>--%>
                     </div>
                 </div>
             </div>
